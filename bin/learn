@@ -2,8 +2,12 @@
 
 require 'learn'
 
+COMMANDS = [
+  'test'
+]
+
 # Default to running tests
-if ARGV.empty?
+if ARGV.empty? || ARGV.none? {|arg| COMMANDS.include?(arg)}
   ARGV << 'test'
 end
 
