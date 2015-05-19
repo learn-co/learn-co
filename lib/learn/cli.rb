@@ -24,13 +24,17 @@ module Learn
       puts Learn::VERSION
     end
 
+    desc "submit", "Submit your completed lesson"
     def submit
       puts "Coming soon!"
       exit
     end
 
+    desc "open lab_name [--editor editor_binary]", "Open the given lab [with your editor]"
     option :editor, required: false, type: :string
     def open(lab_name)
+      lab_name = Learn::Lab::Parser.new(lab_name).parse!
+      puts lab_name
       puts "Coming soon!"
       exit
     end

@@ -22,6 +22,6 @@ if ['-v', '--version'].include?(ARGV.first)
   exit
 end
 
-ARGV = OptionsSanitizer.new(ARGV).sanitize!
+ARGV = Learn::OptionsSanitizer.new(ARGV).sanitize!
 
 Learn::CLI.start(ARGV)
