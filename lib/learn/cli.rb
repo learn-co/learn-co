@@ -16,7 +16,7 @@ module Learn
       passed in.
     LONGDESC
     def test(*opts)
-      system("learn-test #{opts.join}")
+      system("learn-test #{opts.join(' ')}")
     end
   end
 end
