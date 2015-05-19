@@ -8,7 +8,7 @@ COMMANDS = [
 
 # Default to running tests
 if ARGV.empty? || ARGV.none? {|arg| COMMANDS.include?(arg)}
-  ARGV << 'test'
+  ARGV.unshift('test')
 end
 
 Learn::CLI.start(ARGV)
