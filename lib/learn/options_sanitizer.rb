@@ -1,5 +1,3 @@
-require 'pry'
-
 module Learn
   class OptionsSanitizer
     attr_reader :args
@@ -13,14 +11,9 @@ module Learn
     end
 
     def sanitize!
-      binding.pry
-      SANITIZE_LIST.each do |existing, replacement|
-        if args[existing]
-          args[existing] = replacement
-        end
+      args.map do |arg|
+        SANITIZE_LIST[arg] ? SANITIZE_LIST[arg] : arg
       end
-
-      args
     end
   end
 end
