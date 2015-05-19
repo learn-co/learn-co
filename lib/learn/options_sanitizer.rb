@@ -12,7 +12,9 @@ module Learn
 
     def sanitize!
       SANITIZE_LIST.each do |existing, replacement|
-        args[existing] = replacement
+        if args[existing]
+          args[existing] = replacement
+        end
       end
 
       args
