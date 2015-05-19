@@ -18,5 +18,10 @@ module Learn
     def test(*opts)
       system("learn-test #{opts.join(' ')}")
     end
+
+    desc "version, -v, --version", "Display the current version of the Learn gem"
+    def version
+      puts Learn::VERSION
+    end
   end
 end

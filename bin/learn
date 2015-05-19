@@ -4,12 +4,20 @@ require 'learn'
 
 COMMANDS = [
   'test',
-  'help'
+  'help',
+  'version',
+  '-v',
+  '--version'
 ]
 
 # Default to running tests
 if ARGV.empty? || ARGV.none? {|arg| COMMANDS.include?(arg)}
   ARGV.unshift('test')
+end
+
+if ['-v', '--version'].include?(ARGV.first)
+  puts Learn::VERSION
+  exit
 end
 
 Learn::CLI.start(ARGV)
