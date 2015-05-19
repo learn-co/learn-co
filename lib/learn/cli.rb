@@ -23,5 +23,16 @@ module Learn
     def version
       puts Learn::VERSION
     end
+
+    def submit
+      puts "Coming soon!"
+      exit
+    end
+
+    option :editor, required: false, type: :string
+    def open(lab_name)
+      puts "Coming soon!"
+      exit
+    end
   end
 end

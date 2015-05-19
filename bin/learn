@@ -2,16 +2,18 @@
 
 require 'learn'
 
-COMMANDS = [
+KNOWN_COMMANDS = [
   'test',
   'help',
   'version',
   '-v',
-  '--version'
+  '--version',
+  'submit',
+  'open'
 ]
 
 # Default to running tests
-if ARGV.empty? || ARGV.none? {|arg| COMMANDS.include?(arg)}
+if ARGV.empty? || ARGV.none? {|arg| KNOWN_COMMANDS.include?(arg)}
   ARGV.unshift('test')
 end
 
@@ -19,5 +21,7 @@ if ['-v', '--version'].include?(ARGV.first)
   puts Learn::VERSION
   exit
 end
+
+ARGV = OptionsSanitizer.new(ARGV).sanitize!
 
 Learn::CLI.start(ARGV)
