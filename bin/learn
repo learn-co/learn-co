@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+require 'learn'
+
+# Default to running tests
+if ARGV.empty?
+  ARGV << 'test'
+end
+
+Learn::CLI.start(ARGV)
