@@ -11,6 +11,7 @@ module Learn
     end
 
     def sanitize!
+      binding.pry
       SANITIZE_LIST.each do |existing, replacement|
         if args[existing]
           args[existing] = replacement
