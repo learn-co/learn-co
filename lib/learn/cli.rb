@@ -15,8 +15,8 @@ module Learn
       When running an RSpec test suite, all normal RSpec options can be
       passed in.
     LONGDESC
-    def test(opts=nil)
-      system("learn-test #{opts}")
+    def test(*opts)
+      system("learn-test #{opts.join}")
     end
   end
 end
