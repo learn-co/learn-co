@@ -3,7 +3,8 @@
 require 'learn'
 
 COMMANDS = [
-  'test'
+  'test',
+  'help'
 ]
 
 # Default to running tests
