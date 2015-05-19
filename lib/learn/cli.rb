@@ -7,9 +7,13 @@ module Learn
       You can supply the following options when running Jasmine tests:
 
       -n, --[no-]color  # Turn off color output
+
       -l, --local       # Don't push results to Learn
+
       -b, --browser     # Run tests in browser
+
       -o, --out FILE    # Specify an output file for your test results
+
       -s, --skip        # Don't run dependency checks
 
       When running an RSpec test suite, all normal RSpec options can be
