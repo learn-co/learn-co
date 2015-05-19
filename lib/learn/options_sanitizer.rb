@@ -11,7 +11,7 @@ module Learn
     end
 
     def sanitize!
-      args.map do |arg|
+      args.map! do |arg|
         SANITIZE_LIST[arg] ? SANITIZE_LIST[arg] : arg
       end
     end
