@@ -40,9 +40,8 @@ module Learn
     end
 
     desc "config", "Reconfigure the Learn gem"
-    option :directory, required: false, type: :string, aliases: ['d']
     def config
-      system("learn-config #{options[:directory]}")
+      system("learn-config")
     end
   end
 end
