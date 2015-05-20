@@ -9,7 +9,8 @@ KNOWN_COMMANDS = [
   '-v',
   '--version',
   'submit',
-  'open'
+  'open',
+  'config'
 ]
 
 # Default to running tests

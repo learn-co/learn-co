@@ -38,5 +38,11 @@ module Learn
       puts "Coming soon!"
       exit
     end
+
+    desc "config", "Reconfigure the Learn gem"
+    option :directory, required: false, type: :string, aliases: ['d']
+    def config
+      system("learn-config #{options[:directory]}")
+    end
   end
 end
