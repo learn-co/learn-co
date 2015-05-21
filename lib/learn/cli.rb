@@ -16,6 +16,7 @@ module Learn
       passed in.
     LONGDESC
     def test(*opts)
+      system("learn-config")
       system("learn-test #{opts.join(' ')}")
     end
 
@@ -39,9 +40,14 @@ module Learn
       exit
     end
 
-    desc "config", "Reconfigure the Learn gem"
-    def config
-      system("learn-config")
+    desc "whoami", "Display your Learn gem configuration information"
+    def whoami
+      system("learn-config --whoami")
+    end
+
+    desc "reset", "Reset your Learn gem configuration"
+    def reset
+      system("learn-config --reset")
     end
   end
 end

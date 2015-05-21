@@ -10,7 +10,8 @@ KNOWN_COMMANDS = [
   '--version',
   'submit',
   'open',
-  'config'
+  'reset',
+  'whoami'
 ]
 
 # Default to running tests
