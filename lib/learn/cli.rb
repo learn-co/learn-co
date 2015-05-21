@@ -42,7 +42,7 @@ module Learn
 
     desc "whoami", "Display your Learn gem configuration information"
     def whoami
-      system("learn-config --whoami &>/dev/null")
+      system("learn-config --whoami")
     end
 
     desc "reset", "Reset your Learn gem configuration"
