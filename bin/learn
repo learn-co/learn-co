@@ -8,8 +8,8 @@ KNOWN_COMMANDS = [
   'version',
   '-v',
   '--version',
-  'submit',
-  'open',
+  #'submit',
+  #'open',
   'reset',
   'whoami'
 ]

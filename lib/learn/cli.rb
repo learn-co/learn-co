@@ -25,20 +25,22 @@ module Learn
       puts Learn::VERSION
     end
 
-    desc "submit", "Submit your completed lesson"
-    def submit
-      puts "Coming soon!"
-      exit
-    end
+    # TODO: Write submit
+    #desc "submit", "Submit your completed lesson"
+    #def submit
+      #puts "Coming soon!"
+      #exit
+    #end
 
-    desc "open lab_name [--editor editor_binary]", "Open the given lab [with your editor]"
-    option :editor, required: false, type: :string
-    def open(*lab_name)
-      lab_name = Learn::Lab::Parser.new(lab_name.join(' ')).parse!
-      puts lab_name
-      puts "Coming soon!"
-      exit
-    end
+    # TODO: Write open
+    #desc "open lab_name [--editor editor_binary]", "Open the given lab [with your editor]"
+    #option :editor, required: false, type: :string
+    #def open(*lab_name)
+      #lab_name = Learn::Lab::Parser.new(lab_name.join(' ')).parse!
+      #puts lab_name
+      #puts "Coming soon!"
+      #exit
+    #end
 
     desc "whoami", "Display your Learn gem configuration information"
     def whoami
