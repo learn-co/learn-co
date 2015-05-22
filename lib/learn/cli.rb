@@ -24,9 +24,14 @@ module Learn
       puts Learn::VERSION
     end
 
-    desc 'submit', 'Submit your completed lesson'
-    def submit
-      system('learn-submit')
+    desc 'submit ["message"]', 'Submit your completed lesson'
+    long_desc <<-LONGDESC
+      `learn submit ["message"]` will submit your lesson to Learn.
+
+      It will add your changes, commit them, push to GitHub, and issue a pull request.
+    LONGDESC
+    def submit(*opts)
+      system("learn-submit #{opts.join(' ')}")
     end
 
     # TODO: Write open
