@@ -31,7 +31,6 @@ module Learn
       It will add your changes, commit them, push to GitHub, and issue a pull request.
     LONGDESC
     def submit(*opts)
-      puts opts
       system("learn-submit #{opts.join(' ')}")
     end
 
