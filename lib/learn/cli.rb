@@ -26,8 +26,7 @@ module Learn
 
     desc 'submit', 'Submit your completed lesson'
     def submit
-      puts 'Coming soon!'
-      exit
+      system('learn-submit')
     end
 
     # TODO: Write open
