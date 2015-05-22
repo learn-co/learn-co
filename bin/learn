@@ -26,4 +26,8 @@ end
 
 Learn::OptionsSanitizer.new(ARGV).sanitize!
 
+if !(ARGV[0] == 'reset')
+  system('learn-config')
+end
+
 Learn::CLI.start(ARGV)

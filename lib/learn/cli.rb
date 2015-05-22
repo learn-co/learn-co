@@ -1,12 +1,12 @@
 module Learn
   class CLI < Thor
-    desc "[test] [options]", "Run a lesson's test suite"
+    desc '[test] [options]', "Run a lesson's test suite"
     long_desc <<-LONGDESC
       `learn [test] [options]` will run your lesson's test suite.
 
       You can supply the following options when running Jasmine tests:
 
-      \x20 -n, --[no-]color  # Turn off color output
+      -n, --[no-]color  # Turn off color output
       \x5 -l, --local       # Don't push results to Learn
       \x5 -b, --browser     # Run tests in browser
       \x5 -o, --out FILE    # Specify an output file
@@ -16,21 +16,19 @@ module Learn
       passed in.
     LONGDESC
     def test(*opts)
-      system("learn-config")
       system("learn-test #{opts.join(' ')}")
     end
 
-    desc "version, -v, --version", "Display the current version of the Learn gem"
+    desc 'version, -v, --version', 'Display the current version of the Learn gem'
     def version
       puts Learn::VERSION
     end
 
-    # TODO: Write submit
-    #desc "submit", "Submit your completed lesson"
-    #def submit
-      #puts "Coming soon!"
-      #exit
-    #end
+    desc 'submit', 'Submit your completed lesson'
+    def submit
+      puts 'Coming soon!'
+      exit
+    end
 
     # TODO: Write open
     #desc "open lab_name [--editor editor_binary]", "Open the given lab [with your editor]"
@@ -42,14 +40,14 @@ module Learn
       #exit
     #end
 
-    desc "whoami", "Display your Learn gem configuration information"
+    desc 'whoami', 'Display your Learn gem configuration information'
     def whoami
-      system("learn-config --whoami")
+      system('learn-config --whoami')
     end
 
-    desc "reset", "Reset your Learn gem configuration"
+    desc 'reset', 'Reset your Learn gem configuration'
     def reset
-      system("learn-config --reset")
+      system('learn-config --reset')
     end
   end
 end
