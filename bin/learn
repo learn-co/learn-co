@@ -26,7 +26,7 @@ end
 
 Learn::OptionsSanitizer.new(ARGV).sanitize!
 
-if !(ARGV[0] == 'reset')
+if !(ARGV[0] == 'reset' || ARGV[0] == 'whoami')
   system('learn-config')
 end
 
