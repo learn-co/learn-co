@@ -34,15 +34,18 @@ module Learn
       system("learn-submit #{opts.join(' ')}")
     end
 
-    # TODO: Write open
-    #desc "open lab_name [--editor editor_binary]", "Open the given lab [with your editor]"
-    #option :editor, required: false, type: :string
-    #def open(*lab_name)
+    desc "open lab_name [--editor=editor_binary]", "Open the given lab [with your editor]"
+    option :editor, required: false, type: :string, aliases: ['e']
+    def open(*lab_name)
+      puts "LAB NAME"
+      puts lab_name
+      puts "EDITOR"
+      puts options[:editor]
       #lab_name = Learn::Lab::Parser.new(lab_name.join(' ')).parse!
       #puts lab_name
-      #puts "Coming soon!"
-      #exit
-    #end
+      puts "Coming soon!"
+      exit
+    end
 
     desc 'whoami', 'Display your Learn gem configuration information'
     def whoami

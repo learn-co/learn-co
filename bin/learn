@@ -9,7 +9,7 @@ KNOWN_COMMANDS = [
   '-v',
   '--version',
   'submit',
-  #'open',
+  'open',
   'reset',
   'whoami',
   'directory'
