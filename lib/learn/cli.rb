@@ -37,14 +37,10 @@ module Learn
     desc "open lab_name [--editor=editor_binary]", "Open the given lab [with your editor]"
     option :editor, required: false, type: :string, aliases: ['e']
     def open(*lab_name)
-      puts "LAB NAME"
-      puts lab_name
-      puts "EDITOR"
-      puts options[:editor]
-      #lab_name = Learn::Lab::Parser.new(lab_name.join(' ')).parse!
-      #puts lab_name
-      puts "Coming soon!"
-      exit
+      lab_name = Learn::Lab::Parser.new(lab_name.join(' ')).parse!
+      editor = options[:editor]
+
+      system("learn-open #{lab_name} #{editor}")
     end
 
     desc 'whoami', 'Display your Learn gem configuration information'
