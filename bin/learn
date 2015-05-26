@@ -15,6 +15,10 @@ KNOWN_COMMANDS = [
   'directory'
 ]
 
+NON_PRE_CONFIG_COMMANDS = [
+  'reset', 'whoami', 'directory', 'help', 'version', '--version', '-v'
+]
+
 # Default to running tests
 if ARGV.empty? || ARGV.none? {|arg| KNOWN_COMMANDS.include?(arg)}
   ARGV.unshift('test')
@@ -27,7 +31,7 @@ end
 
 Learn::OptionsSanitizer.new(ARGV).sanitize!
 
-if !(['reset', 'whoami', 'directory'].include?(ARGV[0]))
+if !(NON_PRE_CONFIG_COMMANDS.include?(ARGV[0]))
   system('learn-config')
 end
 
