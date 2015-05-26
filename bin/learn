@@ -11,7 +11,8 @@ KNOWN_COMMANDS = [
   'submit',
   #'open',
   'reset',
-  'whoami'
+  'whoami',
+  'directory'
 ]
 
 # Default to running tests
@@ -26,7 +27,7 @@ end
 
 Learn::OptionsSanitizer.new(ARGV).sanitize!
 
-if !(ARGV[0] == 'reset' || ARGV[0] == 'whoami')
+if !(['reset', 'whoami', 'directory'].include?(ARGV[0]))
   system('learn-config')
 end
 

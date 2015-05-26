@@ -53,5 +53,10 @@ module Learn
     def reset
       system('learn-config --reset')
     end
+
+    desc 'directory', 'Set your local Learn directory. Defaults to ~/Development/code'
+    def directory
+      system('learn-config --set-directory')
+    end
   end
 end
