@@ -40,7 +40,7 @@ module Learn
       lab_name = Learn::Lab::Parser.new(lab_name.join(' ')).parse!
       editor = options[:editor]
 
-      system("learn-open #{lab_name} #{editor}")
+      system("learn-open #{lab_name} --editor=#{editor}")
     end
 
     desc 'whoami', 'Display your Learn gem configuration information'
