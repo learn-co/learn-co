@@ -23,5 +23,6 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency "learn-test", ">= 1.1.1"
   spec.add_runtime_dependency "learn-config", ">= 0.0.32"
+  spec.add_runtime_dependency "learn-open"
   spec.add_runtime_dependency "thor"
 end
