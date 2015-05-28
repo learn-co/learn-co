@@ -21,8 +21,9 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "pry"
 
-  spec.add_runtime_dependency "learn-test", ">= 1.1.1"
-  spec.add_runtime_dependency "learn-config", ">= 0.0.32"
-  spec.add_runtime_dependency "learn-open"
+  spec.add_runtime_dependency "learn-test", ">= 1.2.0"
+  spec.add_runtime_dependency "learn-config", ">= 1.0.0"
+  spec.add_runtime_dependency "learn-open", ">= 1.0.0"
+  spec.add_runtime_dependency "learn-submit", ">= 1.0.0"
   spec.add_runtime_dependency "thor"
 end
