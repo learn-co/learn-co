@@ -34,7 +34,13 @@ module Learn
       system("learn-submit #{opts.join(' ')}")
     end
 
-    desc "open lab_name [--editor=editor_binary]", "Open the given lab [with your editor]"
+    desc "open [lesson-name] [--editor=editor-binary]", "Open your current lesson [or the given lesson] [with your editor]"
+    long_desc <<-LONGDESC
+      `learn open [lesson-name] [--editor=editor-binary]` will open a Learn lesson locally.
+
+      If given no lesson name, it will open your current lesson. By default, it will open
+      using the editor specified in ~/.learn-config.
+    LONGDESC
     option :editor, required: false, type: :string, aliases: ['e']
     def open(*lab_name)
       lab_name = Learn::Lab::Parser.new(lab_name.join(' ')).parse!
