@@ -40,6 +40,9 @@ module Learn
 
       If given no lesson name, it will open your current lesson. By default, it will open
       using the editor specified in ~/.learn-config.
+
+      If the lesson is an iOS lab, it will open in Xcode. If it is a README, it will open the lesson
+      in your browser.
     LONGDESC
     option :editor, required: false, type: :string, aliases: ['e']
     def open(*lab_name)
