@@ -52,6 +52,14 @@ module Learn
       system("learn-open #{lab_name} --editor=#{editor}")
     end
 
+    desc "next [--editor=editor-binary]", "Open your next lesson [with your editor]"
+    option :editor, required: false, type: :string, aliases: ['e']
+    def next
+      editor = options[:editor]
+
+      system("learn-open --next --editor=#{editor}")
+    end
+
     desc 'whoami', 'Display your Learn gem configuration information'
     def whoami
       system('learn-config --whoami')

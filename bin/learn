@@ -12,7 +12,8 @@ KNOWN_COMMANDS = [
   'open',
   'reset',
   'whoami',
-  'directory'
+  'directory',
+  'next'
 ]
 
 NON_PRE_CONFIG_COMMANDS = [
