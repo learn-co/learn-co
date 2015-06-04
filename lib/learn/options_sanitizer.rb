@@ -46,7 +46,7 @@ module Learn
     end
 
     def sanitize_test_args!
-      if args.empty? || args.none? {|arg| KNOWN_COMMANDS.include?(arg)}
+      if args.empty? || !KNOWN_COMMANDS.include?(args[0])
         if args[0] && !args[0].start_with?('-')
           puts "Unknown command: #{args[0]}. Type `learn help` to see what you can do."
           exit
@@ -54,8 +54,8 @@ module Learn
           index = args.index('-o') || args.index('--out')
           if args[index+1] && !args[index+1].start_with?('-')
             out_arg = "#{args[index]} #{args[index+1]}"
-            args.delete(args[index])
             args.delete(args[index+1])
+            args.delete(args[index])
 
             if args.all? {|arg| KNOWN_TEST_FLAGS.include?(arg)}
               args.unshift('test')
@@ -82,10 +82,13 @@ module Learn
         index = args.index('-o') || args.index('--out')
         if args[index+1] && !args[index+1].start_with?('-')
           out_arg = "#{args[index]} #{args[index+1]}"
-          args.delete(args[index])
-          args.delete(args[index+1])
+          puts "ARGS BEFORE: #{args}"
+          args.delete_at(index+1)
+          args.delete_at(index)
+          puts "ARGS AFTER: #{args}"
 
-          if args.all? {|arg| KNOWN_TEST_FLAGS.include?(arg)}
+          puts "ARGS MINUS FIRST: #{args[1..-1]}"
+          if args[1..-1].all? {|arg| KNOWN_TEST_FLAGS.include?(arg)}
             args.push(out_arg)
           else
             unknown_flags = args.select {|arg| !KNOWN_TEST_FLAGS.include?(arg)}
