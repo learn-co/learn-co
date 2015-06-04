@@ -6,6 +6,28 @@ module Learn
       '-e' => '--editor'
     }
 
+    KNOWN_COMMANDS = [
+      'test',
+      'help',
+      'version',
+      '-v',
+      '--version',
+      'submit',
+      'open',
+      'reset',
+      'whoami',
+      'directory',
+      'next'
+    ]
+
+    KNOWN_TEST_FLAGS = [
+      '--no-color',
+      '-b',
+      '--browser',
+      '-s',
+      '--skip'
+    ]
+
     def initialize(args)
       @args = args
     end
@@ -56,6 +78,24 @@ module Learn
       elsif args[0] == 'test' && args[1] && !args[1].start_with?('-')
         puts "Unknown flag: #{args[1]}"
         exit
+      elsif args[0] == 'test' && args.any? {|arg| ['-o', '--out'].include?(arg)}
+        index = args.index('-o') || args.index('--out')
+        if args[index+1] && !args[index+1].start_with?('-')
+          out_arg = "#{args[index]} #{args[index+1]}"
+          args.delete(args[index])
+          args.delete(args[index+1])
+
+          if args.all? {|arg| KNOWN_TEST_FLAGS.include?(arg)}
+            args.push(out_arg)
+          else
+            unknown_flags = args.select {|arg| !KNOWN_TEST_FLAGS.include?(arg)}
+            puts "Unknown #{unknown_flags.count > 1 ? 'flags' : 'flag'}: #{unknown_flags.join(', ')}"
+            exit
+          end
+        else
+          puts "Must specify an output file when using the -o, --out flag."
+          exit
+        end
       end
     end
   end

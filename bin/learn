@@ -2,66 +2,9 @@
 
 require 'learn'
 
-KNOWN_COMMANDS = [
-  'test',
-  'help',
-  'version',
-  '-v',
-  '--version',
-  'submit',
-  'open',
-  'reset',
-  'whoami',
-  'directory',
-  'next'
-]
-
-KNOWN_TEST_FLAGS = [
-  '--no-color',
-  '-b',
-  '--browser',
-  '-s',
-  '--skip'
-]
-
 NON_PRE_CONFIG_COMMANDS = [
   'reset', 'whoami', 'directory', 'help', 'version', '--version', '-v'
 ]
-
-# Default to running tests
-if ARGV.empty? || ARGV.none? {|arg| KNOWN_COMMANDS.include?(arg)}
-  if ARGV[0] && !ARGV[0].start_with?('-')
-    puts "Unknown command: #{ARGV[0]}. Type `learn help` to see what you can do."
-    exit
-  elsif ARGV.any? {|arg| ['-o', '--out'].include?(arg)}
-    index = ARGV.index('-o') || ARGV.index('--out')
-    if ARGV[index+1] && !ARGV[index+1].start_with?('-')
-      out_arg = "#{ARGV[index]} #{ARGV[index+1]}"
-      ARGV.delete(ARGV[index])
-      ARGV.delete(ARGV[index+1])
-
-      if ARGV.all? {|arg| KNOWN_TEST_FLAGS.include?(arg)}
-        ARGV.unshift('test')
-        ARGV.push(out_arg)
-      else
-        unknown_flags = ARGV.select {|arg| !KNOWN_TEST_FLAGS.include?(arg)}
-        puts "Unknown #{unknown_flags.count > 1 ? 'flags' : 'flag'}: #{unknown_flags.join(', ')}"
-        exit
-      end
-    else
-      puts "Must specify an output file when using the -o, --out flag."
-      exit
-    end
-  elsif ARGV.all? {|arg| arg.start_with?('-')}
-    ARGV.unshift('test')
-  else
-    puts "What?"
-    exit
-  end
-elsif ARGV[0] == 'test' && ARGV[1] && !ARGV[1].start_with?('-')
-  puts "Unknown flag: #{ARGV[1]}"
-  exit
-end
 
 if ['-v', '--version'].include?(ARGV.first)
   puts Learn::VERSION
