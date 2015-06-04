@@ -17,8 +17,6 @@ KNOWN_COMMANDS = [
 ]
 
 KNOWN_TEST_FLAGS = [
-  '-n',
-  '--no',
   '--no-color',
   '-b',
   '--browser',

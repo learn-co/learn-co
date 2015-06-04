@@ -6,7 +6,7 @@ module Learn
 
       You can supply the following options when running Jasmine tests:
 
-      -n, --[no-]color  # Turn off color output
+      --no-color            # Turn off color output
       \x5 -l, --local       # Don't push results to Learn
       \x5 -b, --browser     # Run tests in browser
       \x5 -o, --out FILE    # Specify an output file
