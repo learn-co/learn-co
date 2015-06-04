@@ -72,7 +72,7 @@ module Learn
         elsif args.all? {|arg| arg.start_with?('-')}
           args.unshift('test')
         else
-          puts "What?"
+          puts "Sorry, I can't understand what you're trying to do. Type `learn help` for help."
           exit
         end
       elsif args[0] == 'test' && args[1] && !args[1].start_with?('-')
@@ -82,12 +82,9 @@ module Learn
         index = args.index('-o') || args.index('--out')
         if args[index+1] && !args[index+1].start_with?('-')
           out_arg = "#{args[index]} #{args[index+1]}"
-          puts "ARGS BEFORE: #{args}"
           args.delete_at(index+1)
           args.delete_at(index)
-          puts "ARGS AFTER: #{args}"
 
-          puts "ARGS MINUS FIRST: #{args[1..-1]}"
           if args[1..-1].all? {|arg| KNOWN_TEST_FLAGS.include?(arg)}
             args.push(out_arg)
           else
