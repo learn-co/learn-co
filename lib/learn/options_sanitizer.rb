@@ -39,6 +39,7 @@ module Learn
 
     private
 
+    # Sanitization methods
     def sanitize_editor_arg!
       args.map! do |arg|
         SANITIZE_LIST[arg] ? SANITIZE_LIST[arg] : arg
@@ -46,57 +47,118 @@ module Learn
     end
 
     def sanitize_test_args!
-      if args.empty? || !KNOWN_COMMANDS.include?(args[0])
-        if args[0] && !args[0].start_with?('-')
-          puts "Unknown command: #{args[0]}. Type `learn help` to see what you can do."
-          exit
-        elsif args.any? {|arg| ['-o', '--out'].include?(arg)}
-          index = args.index('-o') || args.index('--out')
-          if args[index+1] && !args[index+1].start_with?('-')
-            out_arg = "#{args[index]} #{args[index+1]}"
-            args.delete(args[index+1])
-            args.delete(args[index])
-
-            if args.all? {|arg| KNOWN_TEST_FLAGS.include?(arg)}
-              args.unshift('test')
-              args.push(out_arg)
-            else
-              unknown_flags = args.select {|arg| !KNOWN_TEST_FLAGS.include?(arg)}
-              puts "Unknown #{unknown_flags.count > 1 ? 'flags' : 'flag'}: #{unknown_flags.join(', ')}"
-              exit
-            end
-          else
-            puts "Must specify an output file when using the -o, --out flag."
-            exit
-          end
-        elsif args.all? {|arg| arg.start_with?('-')}
-          args.unshift('test')
-        else
-          puts "Sorry, I can't understand what you're trying to do. Type `learn help` for help."
-          exit
-        end
-      elsif args[0] == 'test' && args[1] && !args[1].start_with?('-')
-        puts "Unknown flag: #{args[1]}"
-        exit
-      elsif args[0] == 'test' && args.any? {|arg| ['-o', '--out'].include?(arg)}
-        index = args.index('-o') || args.index('--out')
-        if args[index+1] && !args[index+1].start_with?('-')
-          out_arg = "#{args[index]} #{args[index+1]}"
-          args.delete_at(index+1)
-          args.delete_at(index)
-
-          if args[1..-1].all? {|arg| KNOWN_TEST_FLAGS.include?(arg)}
-            args.push(out_arg)
-          else
-            unknown_flags = args.select {|arg| !KNOWN_TEST_FLAGS.include?(arg)}
-            puts "Unknown #{unknown_flags.count > 1 ? 'flags' : 'flag'}: #{unknown_flags.join(', ')}"
-            exit
-          end
-        else
-          puts "Must specify an output file when using the -o, --out flag."
-          exit
-        end
+      if missing_or_unknown_args?
+        handle_missing_or_unknown_args
+      elsif has_test_command_and_invalid_flag?
+        exit_with_invalid_flag
+      elsif has_test_command_and_output_flag?
+        check_for_output_file(add_test_command: false)
       end
+    end
+
+    # Arg manipulation methods
+    def handle_missing_or_unknown_args
+      if first_arg_not_a_flag?
+        exit_with_unknown_command
+      elsif has_output_flag?
+        check_for_output_file
+      elsif only_has_flag_arguments?
+        add_test_command
+      else
+        exit_with_cannot_understand
+      end
+    end
+
+    def check_for_output_file(add_test_command: true)
+      index = args.index('-o') || args.index('--out')
+
+      if output_file_specified?(index)
+        initial_arg_index = add_test_command ? 0 : 1
+        out_arg = "#{args[index]} #{args[index+1]}"
+        delete_output_file_args!(index)
+
+        if only_has_known_test_flags?(initial_arg_index)
+          rebuild_args!(output_file_arg: out_arg, add_test_command: add_test_command)
+        else
+          exit_with_unknown_flags
+        end
+      else
+        exit_with_missing_output_file
+      end
+    end
+
+    def delete_output_file_args!(index)
+      args.delete_at(index+1)
+      args.delete_at(index)
+    end
+
+    def rebuild_args!(output_file_arg:, add_test_command:)
+      args.unshift('test') if add_test_command
+      args.push(output_file_arg)
+    end
+
+    def add_test_command
+      args.unshift('test')
+    end
+
+    # Arg check methods
+    def missing_or_unknown_args?
+      args.empty? || !KNOWN_COMMANDS.include?(args[0])
+    end
+
+    def first_arg_not_a_flag?
+      args[0] && !args[0].start_with?('-')
+    end
+
+    def has_output_flag?
+      args.any? {|arg| ['-o', '--out'].include?(arg)}
+    end
+
+    def only_has_known_test_flags?(start_index)
+      args[start_index..-1].all? {|arg| KNOWN_TEST_FLAGS.include?(arg)}
+    end
+
+    def output_file_specified?(index)
+      args[index+1] && !args[index+1].start_with?('-')
+    end
+
+    def only_has_flag_arguments?
+      args.all? {|arg| arg.start_with?('-')}
+    end
+
+    def has_test_command_and_invalid_flag?
+      args[0] == 'test' && args[1] && !args[1].start_with?('-')
+    end
+
+    def has_test_command_and_output_flag?
+      args[0] == 'test' && args.any? {|arg| ['-o', '--out'].include?(arg)}
+    end
+
+    # Exit methods
+    def exit_with_invalid_flag
+      puts "Invalid flag: #{args[1]}"
+      exit
+    end
+
+    def exit_with_unknown_command
+      puts "Unknown command: #{args[0]}. Type `learn help` to see what you can do."
+      exit
+    end
+
+    def exit_with_cannot_understand
+      puts "Sorry, I can't understand what you're trying to do. Type `learn help` for help."
+      exit
+    end
+
+    def exit_with_unknown_flags
+      unknown_flags = args.select {|arg| !KNOWN_TEST_FLAGS.include?(arg)}
+      puts "Unknown #{unknown_flags.count > 1 ? 'flags' : 'flag'}: #{unknown_flags.join(', ')}"
+      exit
+    end
+
+    def exit_with_missing_output_file
+      puts "Must specify an output file when using the -o, --out flag."
+      exit
     end
   end
 end
