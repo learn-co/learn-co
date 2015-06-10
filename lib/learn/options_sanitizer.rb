@@ -17,7 +17,8 @@ module Learn
       'reset',
       'whoami',
       'directory',
-      'next'
+      'next',
+      'doctor'
     ]
 
     KNOWN_TEST_FLAGS = [

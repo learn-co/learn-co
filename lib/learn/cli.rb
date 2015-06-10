@@ -74,5 +74,10 @@ module Learn
     def directory
       system('learn-config --set-directory')
     end
+
+    desc 'doctor', 'Check your local environment setup'
+    def doctor
+      system('learn-doctor')
+    end
   end
 end
