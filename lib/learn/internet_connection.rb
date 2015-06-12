@@ -5,16 +5,18 @@ module Learn
   class InternetConnection
     attr_accessor :connection
 
-    STATUS_URI          = URI.new('https://learn.co/p/gem_status')
+    STATUS_URI          = URI('https://learn.co/p/gem_status')
     SUCCESS_STATUS      = 'this is a boring message to prove you can connect to the internet'
     NO_INTERNET_MESSAGE = "It seems like you aren't connected to the internet. All features of the Learn gem may not work properly. Trying anyway..."
 
     def self.no_internet_connection?
-      new.test_connection.no_connection?
+      new.no_connection?
     end
 
     def initialize
       @connection = false
+
+      test_connection
     end
 
     def test_connection
