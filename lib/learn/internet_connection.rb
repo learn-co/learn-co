@@ -10,7 +10,7 @@ module Learn
     NO_INTERNET_MESSAGE = "It seems like you aren't connected to the internet. All features of the Learn gem may not work properly. Trying anyway..."
 
     def self.no_internet_connection?
-      new.test_connection.connection?
+      new.test_connection.no_connection?
     end
 
     def initialize
@@ -22,21 +22,26 @@ module Learn
         Timeout::timeout(5) do
           resp = Net::HTTP.get(STATUS_URI)
 
-          if !resp.match(/#{SUCCESS_STATUS}/)
+          if resp.match(/#{SUCCESS_STATUS}/)
+            self.connection = true
+          else
+            self.connection = false
             puts NO_INTERNET_MESSAGE
           end
         end
       rescue Timeout::Error
+        self.connection = false
         puts NO_INTERNET_MESSAGE
       rescue SocketError => e
         if e.message.match(/getaddrinfo: nodename nor servname provided/)
+          self.connection = false
           puts NO_INTERNET_MESSAGE
         end
       end
     end
 
-    def connection?
-      !!connection
+    def no_connection?
+      !connection
     end
   end
 end
