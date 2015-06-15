@@ -25,6 +25,6 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency "learn-config", ">= 1.0.72"
   spec.add_runtime_dependency "learn-open", ">= 1.1.51"
   spec.add_runtime_dependency "learn-submit", ">= 1.0.12"
-  spec.add_runtime_dependency "learn-doctor", ">= 1.0.0"
+  spec.add_runtime_dependency "learn-doctor", ">= 1.0.2"
   spec.add_runtime_dependency "thor"
 end
