@@ -13,6 +13,10 @@ module Learn
       new.no_connection?
     end
 
+    def self.test_connection
+      new
+    end
+
     def initialize
       @connection = false
 

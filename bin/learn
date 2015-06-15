@@ -6,6 +6,10 @@ NON_PRE_CONFIG_COMMANDS = [
   'reset', 'whoami', 'directory', 'help', 'version', '--version', '-v', 'doctor'
 ]
 
+INTERNET_REQUIRED_COMMANDS = [
+  'whoami', 'doctor', 'directory', 'reset'
+]
+
 if ['-v', '--version'].include?(ARGV.first)
   puts Learn::VERSION
   exit
@@ -15,6 +19,10 @@ Learn::OptionsSanitizer.new(ARGV).sanitize!
 
 if !(NON_PRE_CONFIG_COMMANDS.include?(ARGV[0]))
   system('learn-config') unless Learn::InternetConnection.no_internet_connection?
+end
+
+if INTERNET_REQUIRED_COMMANDS.include?(ARGV[0])
+  Learn::InternetConnection.test_connection
 end
 
 Learn::CLI.start(ARGV)
