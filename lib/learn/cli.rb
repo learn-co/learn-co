@@ -79,5 +79,10 @@ module Learn
     def doctor
       system('learn-doctor')
     end
+
+    desc 'new lab-name -t|--template template-name', 'Generate a new lesson repo using a Learn.co template'
+    def new
+      puts "HI"
+    end
   end
 end
