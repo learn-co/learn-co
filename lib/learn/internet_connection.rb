@@ -4,6 +4,7 @@ require 'timeout'
 module Learn
   class InternetConnection
     attr_accessor :connection
+    attr_reader   :silent
 
     STATUS_URI          = URI('https://learn.co/p/gem_status')
     SUCCESS_STATUS      = 'this is a boring message to prove you can connect to the internet'
@@ -13,12 +14,17 @@ module Learn
       new.no_connection?
     end
 
+    def self.internet_connection?
+      new(silent: true).connection?
+    end
+
     def self.test_connection
       new
     end
 
-    def initialize
+    def initialize(silent: false)
       @connection = false
+      @silent     = silent
 
       test_connection
     end
@@ -32,22 +38,26 @@ module Learn
             self.connection = true
           else
             self.connection = false
-            puts NO_INTERNET_MESSAGE
+            puts NO_INTERNET_MESSAGE if !silent
           end
         end
       rescue Timeout::Error
         self.connection = false
-        puts NO_INTERNET_MESSAGE
+        puts NO_INTERNET_MESSAGE if !silent
       rescue SocketError => e
         if e.message.match(/getaddrinfo: nodename nor servname provided/)
           self.connection = false
-          puts NO_INTERNET_MESSAGE
+          puts NO_INTERNET_MESSAGE if !silent
         end
       end
     end
 
     def no_connection?
       !connection
+    end
+
+    def connection?
+      connection
     end
   end
 end

@@ -80,9 +80,24 @@ module Learn
       system('learn-doctor')
     end
 
-    desc 'new lab-name -t|--template template-name', 'Generate a new lesson repo using a Learn.co template'
-    def new
-      puts "HI"
+    desc 'new lab-name -t|--template template-name', 'Generate a new lesson repo using a Learn.co template', hide: true
+    option :template, required: false, type: :string, aliases: ['t']
+    option :list, required: false, type: :boolean
+    def new(*lab_name)
+      has_internet = Learn::InternetConnection.internet_connection?
+      template = options[:template]
+      list = options[:list]
+
+      if list
+        system("learn-generate --list #{has_internet ? '--internet' : ''}")
+      else
+        if template && template != 'template'
+          system("learn-generate #{template} #{lab_name.join} #{has_internet ? '--internet' : ''}")
+        else
+          puts "You must specify a template with -t or --template"
+          exit
+        end
+      end
     end
   end
 end
