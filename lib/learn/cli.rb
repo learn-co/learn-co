@@ -89,10 +89,10 @@ module Learn
       list = options[:list]
 
       if list
-        system("learn-generate --list --internet=#{has_internet}")
+        system("learn-generate --list #{has_internet ? '--internet' : ''}")
       else
         if template && template != 'template'
-          system("learn-generate #{template} #{lab_name.join} --internet=#{has_internet}")
+          system("learn-generate #{template} #{lab_name.join} #{has_internet ? '--internet' : ''}")
         else
           puts "You must specify a template with -t or --template"
           exit
