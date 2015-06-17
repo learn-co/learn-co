@@ -3,7 +3,8 @@ module Learn
     attr_reader :args
 
     SANITIZE_LIST = {
-      '-e' => '--editor'
+      '-e' => '--editor',
+      '-t' => '--template'
     }
 
     KNOWN_COMMANDS = [
@@ -18,7 +19,8 @@ module Learn
       'whoami',
       'directory',
       'next',
-      'doctor'
+      'doctor',
+      'new'
     ]
 
     KNOWN_TEST_FLAGS = [
