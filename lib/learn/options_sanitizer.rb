@@ -28,7 +28,8 @@ module Learn
       '-b',
       '--browser',
       '-s',
-      '--skip'
+      '--skip',
+      '--keep'
     ]
 
     def initialize(args)
