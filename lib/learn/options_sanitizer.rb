@@ -147,7 +147,7 @@ module Learn
     end
 
     def has_test_command_and_invalid_flag?
-      args[0] == 'test' && args[1] && !args[1].start_with?('-')
+      args[0] == 'test' && args[1] && !args[1].start_with?('-') && !arg_is_a_file?(args[1])
     end
 
     def has_test_command_and_output_flag?
