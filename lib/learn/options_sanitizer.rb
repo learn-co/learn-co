@@ -37,14 +37,14 @@ module Learn
     end
 
     def sanitize!
-      sanitize_editor_arg!
+      sanitize_non_test_args!
       sanitize_test_args!
     end
 
     private
 
     # Sanitization methods
-    def sanitize_editor_arg!
+    def sanitize_non_test_args!
       args.map! do |arg|
         SANITIZE_LIST[arg] ? SANITIZE_LIST[arg] : arg
       end
@@ -62,7 +62,7 @@ module Learn
 
     # Arg manipulation methods
     def handle_missing_or_unknown_args
-      if first_arg_not_a_flag?
+      if first_arg_not_a_flag_or_file?
         exit_with_unknown_command
       elsif has_output_flag?
         check_for_output_file
@@ -110,8 +110,16 @@ module Learn
       args.empty? || !KNOWN_COMMANDS.include?(args[0])
     end
 
-    def first_arg_not_a_flag?
-      args[0] && !args[0].start_with?('-')
+    def first_arg_not_a_flag_or_file?
+      args[0] && !args[0].start_with?('-') && first_arg_not_a_file?
+    end
+
+    def first_arg_not_a_file?
+      ['/', '.'].none? { |punct| args[0].include?(punct) } && !File.exists?(args[0])
+    end
+
+    def arg_is_a_file?(arg)
+      arg && (['/', '.'].any? { |punct| arg.include?(punct) } || File.exists?(arg))
     end
 
     def has_output_flag?
@@ -119,6 +127,10 @@ module Learn
     end
 
     def only_has_known_test_flags?(start_index)
+      if arg_is_a_file?(args[start_index])
+        start_index += 1
+      end
+
       args[start_index..-1].all? {|arg| KNOWN_TEST_FLAGS.include?(arg)}
     end
 
@@ -127,11 +139,15 @@ module Learn
     end
 
     def only_has_flag_arguments?
-      args.all? {|arg| arg.start_with?('-')}
+      if arg_is_a_file?(args[0])
+        args[1..-1].all? {|arg| arg.start_with?('-')}
+      else
+        args.all? {|arg| arg.start_with?('-')}
+      end
     end
 
     def has_test_command_and_invalid_flag?
-      args[0] == 'test' && args[1] && !args[1].start_with?('-')
+      args[0] == 'test' && args[1] && !args[1].start_with?('-') && !arg_is_a_file?(args[1])
     end
 
     def has_test_command_and_output_flag?
