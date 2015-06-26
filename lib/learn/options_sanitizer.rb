@@ -127,7 +127,7 @@ module Learn
     end
 
     def only_has_known_test_flags?(start_index)
-      if arg_is_ a_file?(args[start_index])
+      if arg_is_a_file?(args[start_index])
         start_index += 1
       end
 
