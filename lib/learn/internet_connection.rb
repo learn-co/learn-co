@@ -49,6 +49,11 @@ module Learn
           self.connection = false
           puts NO_INTERNET_MESSAGE if !silent
         end
+      rescue OpenSSL::SSL::SSLError
+        self.connection = false
+        puts "It looks like your SSL certificates aren't quite right."
+        puts "Please run `rvm osx-ssl-certs update all` and then try again."
+        exit
       end
     end
 
