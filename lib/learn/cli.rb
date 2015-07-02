@@ -99,5 +99,10 @@ module Learn
         end
       end
     end
+
+    desc 'status', 'Get the status of your current lesson'
+    def status
+      system('learn-status')
+    end
   end
 end

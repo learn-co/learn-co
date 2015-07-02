@@ -20,7 +20,8 @@ module Learn
       'directory',
       'next',
       'doctor',
-      'new'
+      'new',
+      'status'
     ]
 
     KNOWN_TEST_FLAGS = [
