@@ -24,14 +24,24 @@ module Learn
       puts Learn::VERSION
     end
 
-    desc 'submit ["message"]', 'Submit your completed lesson'
+    desc 'submit [-m|--message "message"] [-t|--team @username @username2]', 'Submit your completed lesson'
+    option :message, required: false, type: :string, aliases: ['m']
+    option :team,    required: false, type: :string, aliases: ['t']
     long_desc <<-LONGDESC
-      `learn submit ["message"]` will submit your lesson to Learn.
+      `learn submit [-m|--message "message"] [-t|--team @username, @username2]` will submit your lesson to Learn.
+
+      If you provide the -t|--team flag, specified team memebers will also get credit.
 
       It will add your changes, commit them, push to GitHub, and issue a pull request.
     LONGDESC
     def submit(*opts)
-      system("learn-submit #{opts.join(' ')}")
+      commit_message = if options['team']
+        Learn::TeamMembers::Parser.new(ARGV).execute
+      else
+        options['message']
+      end
+
+      system("learn-submit #{commit_message}")
     end
 
     desc "open [lesson-name] [--editor=editor-binary]", "Open your current lesson [or the given lesson] [with your editor]"
