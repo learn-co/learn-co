@@ -28,11 +28,39 @@ module Learn
       end
 
       def sanitize_members
-        self.members_list.map! {|m| m.chomp(',').strip}
+        remove_trailing_commas!
 
-        if !self.members_list.all? {|m| m.start_with?('@')}
-          self.members_list.each {|m| m.prepend('@') if !m.start_with?('@')}
+        if members_list.any? {|m| m.include?(',')}
+          split_members_list!
         end
+
+        if !every_member_starts_with_at_symbol?
+          prepend_at_symbols!
+        end
+      end
+
+      def split_members_list!
+        members_list.map! do |m|
+          if m.include?(',')
+            m.split(',')
+          else
+            m
+          end
+        end
+
+        members_list.flatten!
+      end
+
+      def remove_trailing_commas!
+        members_list.map! {|m| m.chomp(',').strip}
+      end
+
+      def every_member_starts_with_at_symbol?
+        members_list.all? {|m| m.start_with?('@')}
+      end
+
+      def prepend_at_symbols!
+        members_list.each {|m| m.prepend('@') if !m.start_with?('@')}
       end
 
       def return_message
