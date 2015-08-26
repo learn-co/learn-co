@@ -17,7 +17,7 @@ module Learn
       private
 
       def parse_full_args
-        index = (full_args.index('-t') || full_args.index('--team')) + 1
+        index = (full_args.index('-t') || full_args.index('--t') || full_args.index('--team') || full_args.index('-team')) + 1
         message_index = full_args.index('-m') || full_args.index('--message')
 
         self.members_list = if !message_index || (message_index && (index > message_index))
