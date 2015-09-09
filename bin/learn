@@ -3,11 +3,11 @@
 require 'learn'
 
 NON_PRE_CONFIG_COMMANDS = [
-  'reset', 'whoami', 'directory', 'help', 'version', '--version', '-v', 'doctor', 'new', 'verify'
+  'reset', 'whoami', 'directory', 'help', 'version', '--version', '-v', 'doctor', 'new', 'hello'
 ]
 
 INTERNET_REQUIRED_COMMANDS = [
-  'whoami', 'doctor', 'directory', 'reset', 'verify'
+  'whoami', 'doctor', 'directory', 'reset', 'hello'
 ]
 
 if ['-v', '--version'].include?(ARGV.first)

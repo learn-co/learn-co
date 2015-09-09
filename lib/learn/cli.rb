@@ -115,9 +115,9 @@ module Learn
       system('learn-status')
     end
 
-    desc 'verify', 'Verify your connection to Learn.co'
-    def verify
-      system('learn-verify')
+    desc 'hello', 'Verify your connection to Learn.co'
+    def hello
+      system('learn-hello')
     end
   end
 end

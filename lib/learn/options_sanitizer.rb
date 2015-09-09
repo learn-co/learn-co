@@ -22,7 +22,7 @@ module Learn
       'doctor',
       'new',
       'status',
-      'verify'
+      'hello'
     ]
 
     KNOWN_TEST_FLAGS = [
