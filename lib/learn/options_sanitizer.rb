@@ -21,7 +21,8 @@ module Learn
       'next',
       'doctor',
       'new',
-      'status'
+      'status',
+      'verify'
     ]
 
     KNOWN_TEST_FLAGS = [
