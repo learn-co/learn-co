@@ -119,5 +119,10 @@ module Learn
     def hello
       system('learn-hello')
     end
+
+    desc 'lint', 'Lint a directory for correct content'
+    def lint
+      system('learn-lint')
+    end
   end
 end
