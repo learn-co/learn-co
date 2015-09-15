@@ -1,4 +1,3 @@
-require 'pry'
 module Learn
   class CLI < Thor
     desc '[test] [options]', "Run a lesson's test suite"
