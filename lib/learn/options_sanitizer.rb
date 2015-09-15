@@ -22,7 +22,8 @@ module Learn
       'doctor',
       'new',
       'status',
-      'hello'
+      'hello',
+      'save'
     ]
 
     KNOWN_TEST_FLAGS = [

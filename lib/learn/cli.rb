@@ -119,5 +119,10 @@ module Learn
     def hello
       system('learn-hello')
     end
+
+    desc 'save', 'Save your work and push it to GitHub'
+    def save
+      system('learn-submit --save-only')
+    end
   end
 end
