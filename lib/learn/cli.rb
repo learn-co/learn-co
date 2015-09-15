@@ -129,8 +129,8 @@ module Learn
       elsif !dir && quiet
         system("learn-lint #{quiet}")
       else
-        dir = Dir.pwd
-        system("learn-lint #{dir}")
+        current_dir = Dir.pwd
+        system("learn-lint #{current_dir}")
       end
     end
 
