@@ -1,3 +1,4 @@
+require 'pry'
 module Learn
   class CLI < Thor
     desc '[test] [options]', "Run a lesson's test suite"
@@ -124,7 +125,17 @@ module Learn
     option :directory, required: false, type: :string
     option :quiet, required: false, type: :string
     def lint
-      system('learn-lint')
+      dir = options[:directory]
+      quiet = options[:quiet]
+      if dir && !quiet
+        system("learn-lint #{dir}")
+      elsif dir && quiet
+        system("learn-lint #{dir} #{quiet}")
+      elsif !dir && quiet
+        system("learn-lint #{quiet}")
+      else
+        system("learn-lint")
+      end
     end
   end
 end
