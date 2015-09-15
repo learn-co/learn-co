@@ -30,5 +30,5 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency "learn-status", ">= 1.0.1"
   spec.add_runtime_dependency "learn-hello", ">= 1.0.0"
   spec.add_runtime_dependency "thor"
-  spec.add_runtime_dependency "learn_linter", ">=1.0.0"
+  spec.add_runtime_dependency "learn_linter"
 end
