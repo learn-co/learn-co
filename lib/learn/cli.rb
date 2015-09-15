@@ -121,6 +121,8 @@ module Learn
     end
 
     desc 'lint', 'Lint a directory for correct content'
+    option :directory, required: false, type: :string
+    option :quiet, required: false, type: :string
     def lint
       system('learn-lint')
     end
