@@ -121,7 +121,7 @@ module Learn
       system('learn-hello')
     end
 
-    desc 'lint', 'Lint a directory for correct content'
+    desc 'lint', 'Lint a directory for correct content', hide: true
     def lint(dir=nil, quiet=nil)
       if dir && !quiet
         system("learn-lint #{dir}")
