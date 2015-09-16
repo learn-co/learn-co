@@ -120,6 +120,20 @@ module Learn
       system('learn-hello')
     end
 
+    desc 'lint', 'Lint a directory for correct content', hide: true
+    def lint(dir=nil, quiet=nil)
+      if dir && !quiet
+        system("learn-lint #{dir}")
+      elsif dir && quiet
+        system("learn-lint #{dir} #{quiet}")
+      elsif !dir && quiet
+        system("learn-lint #{quiet}")
+      else
+        current_dir = Dir.pwd
+        system("learn-lint #{current_dir}")
+      end
+    end
+
     desc 'save', 'Save your work and push it to GitHub'
     def save
       system('learn-submit --save-only')

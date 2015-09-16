@@ -21,7 +21,8 @@ module Learn
       'next',
       'doctor',
       'new',
-      'status',
+      'status', 
+      'lint',
       'hello',
       'save'
     ]

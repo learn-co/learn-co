@@ -3,7 +3,7 @@
 require 'learn'
 
 NON_PRE_CONFIG_COMMANDS = [
-  'reset', 'whoami', 'directory', 'help', 'version', '--version', '-v', 'doctor', 'new', 'hello', 'save'
+  'reset', 'whoami', 'directory', 'help', 'version', '--version', '-v', 'doctor', 'new', 'hello', 'lint', 'save'
 ]
 
 INTERNET_REQUIRED_COMMANDS = [
@@ -26,3 +26,4 @@ if INTERNET_REQUIRED_COMMANDS.include?(ARGV[0])
 end
 
 Learn::CLI.start(ARGV)
+
