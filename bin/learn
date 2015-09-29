@@ -17,7 +17,16 @@ end
 
 Learn::OptionsSanitizer.new(ARGV).sanitize!
 
-if !(NON_PRE_CONFIG_COMMANDS.include?(ARGV[0]))
+# Legacy: leaving this in just in case we do decide to return to our previously
+#         extra-defensive auth checking
+# if !(NON_PRE_CONFIG_COMMANDS.include?(ARGV[0]))
+  # system('learn-config') unless Learn::InternetConnection.no_internet_connection?
+# end
+
+netrc = LearnConfig::NetrcInteractor.new
+token = netrc.read.token
+
+if token.nil? || token == 'machine'
   system('learn-config') unless Learn::InternetConnection.no_internet_connection?
 end
 
