@@ -29,7 +29,7 @@ module Learn
       test_connection
     end
 
-    def test_connection
+    def test_connection(retries: 3)
       begin
         Timeout::timeout(5) do
           resp = Net::HTTP.get(STATUS_URI)
@@ -42,12 +42,20 @@ module Learn
           end
         end
       rescue Timeout::Error
-        self.connection = false
-        puts NO_INTERNET_MESSAGE if !silent
-      rescue SocketError => e
-        if e.message.match(/getaddrinfo: nodename nor servname provided/)
+        if retries > 0
+          test_connection(retries: retries - 1)
+        else
           self.connection = false
           puts NO_INTERNET_MESSAGE if !silent
+        end
+      rescue SocketError => e
+        if e.message.match(/getaddrinfo: nodename nor servname provided/)
+          if retries > 0
+            test_connection(retries: retries - 1)
+          else
+            self.connection = false
+            puts NO_INTERNET_MESSAGE if !silent
+          end
         end
       rescue OpenSSL::SSL::SSLError
         self.connection = false
