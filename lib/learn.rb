@@ -1,4 +1,5 @@
 require 'thor'
+require 'learn_config'
 
 require 'learn/version'
 require 'learn/internet_connection'
