@@ -35,4 +35,3 @@ if INTERNET_REQUIRED_COMMANDS.include?(ARGV[0])
 end
 
 Learn::CLI.start(ARGV)
-
