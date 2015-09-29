@@ -26,7 +26,7 @@ Learn::OptionsSanitizer.new(ARGV).sanitize!
 netrc = Learn::NetrcInteractor.new
 token = netrc.read.password
 
-if token.nil? || token == 'machine'
+if token.nil? || token == 'machine' || !File.exist?(File.expand_path('~/.learn-config'))
   system('learn-config') unless Learn::InternetConnection.no_internet_connection?
 end
 
