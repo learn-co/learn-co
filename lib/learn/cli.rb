@@ -136,7 +136,9 @@ module Learn
 
     desc 'save', 'Save your work and push it to GitHub'
     def save
-      system('learn-submit --save-only')
+      if !system('learn-submit --save-only')
+        exit 1
+      end
     end
   end
 end
