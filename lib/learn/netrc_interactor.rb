@@ -28,7 +28,7 @@ module Learn
     private
 
     def ensure_proper_permissions!
-      system('chmod 0600 ~/.netrc')
+      system('chmod 0600 ~/.netrc &>/dev/null')
     end
   end
 end
