@@ -29,7 +29,7 @@ netrc = Learn::NetrcInteractor.new
 netrc.read
 token = netrc.password
 
-if token.nil? || token == 'machine' || !File.exist?(File.expand_path('~/.learn-config')) && !LEARN_CONFIG_COMMANDS.include?(ARGV[0])
+if !LEARN_CONFIG_COMMANDS.include?(ARGV[0]) && (token.nil? || token == 'machine' || !File.exist?(File.expand_path('~/.learn-config')))
   system('learn-config') unless Learn::InternetConnection.no_internet_connection?
 end
 
