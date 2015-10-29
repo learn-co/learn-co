@@ -33,7 +33,8 @@ module Learn
       '--browser',
       '-s',
       '--skip',
-      '--keep'
+      '--keep',
+      '--fail-fast'
     ]
 
     def initialize(args)
@@ -68,8 +69,9 @@ module Learn
     def handle_missing_or_unknown_args
       if first_arg_not_a_flag_or_file?
         exit_with_unknown_command
-      elsif has_output_flag?
-        check_for_output_file
+      elsif has_output_flag? || has_format_flag?
+        check_for_output_file if has_output_flag?
+        check_for_format_type if has_format_flag?
       elsif only_has_flag_arguments?
         add_test_command
       else
@@ -80,13 +82,13 @@ module Learn
     def check_for_output_file(add_test_command: true)
       index = args.index('-o') || args.index('--out')
 
-      if output_file_specified?(index)
+      if flag_argument_specified?(index)
         initial_arg_index = add_test_command ? 0 : 1
         out_arg = "#{args[index]} #{args[index+1]}"
-        delete_output_file_args!(index)
+        delete_flag_args!(index)
 
         if only_has_known_test_flags?(initial_arg_index)
-          rebuild_args!(output_file_arg: out_arg, add_test_command: add_test_command)
+          rebuild_args!(flag_arg: out_arg, add_test_command: add_test_command)
         else
           exit_with_unknown_flags
         end
@@ -95,14 +97,32 @@ module Learn
       end
     end
 
-    def delete_output_file_args!(index)
+    def check_for_format_type(add_test_command: true)
+      index = args.index('-f') || args.index('--format')
+
+      if flag_argument_specified?(index)
+        initial_arg_index = add_test_command ? 0 : 1
+        format_arg = "#{args[index]} #{args[index+1]}"
+        delete_flag_args!(index)
+
+        if only_has_known_test_flags?(initial_arg_index)
+          rebuild_args!(flag_arg: format_arg, add_test_command: add_test_command)
+        else
+          exit_with_unknown_flags
+        end
+      else
+        exit_with_missing_format_type
+      end
+    end
+
+    def delete_flag_args!(index)
       args.delete_at(index+1)
       args.delete_at(index)
     end
 
-    def rebuild_args!(output_file_arg:, add_test_command:)
+    def rebuild_args!(flag_arg:, add_test_command:)
       args.unshift('test') if add_test_command
-      args.push(output_file_arg)
+      args.push(flag_arg)
     end
 
     def add_test_command
@@ -130,6 +150,10 @@ module Learn
       args.any? {|arg| ['-o', '--out'].include?(arg)}
     end
 
+    def has_format_flag?
+      args.any? {|arg| ['-f', '--format'].include?(arg)}
+    end
+
     def only_has_known_test_flags?(start_index)
       if arg_is_a_file?(args[start_index])
         start_index += 1
@@ -138,7 +162,7 @@ module Learn
       args[start_index..-1].all? {|arg| KNOWN_TEST_FLAGS.include?(arg)}
     end
 
-    def output_file_specified?(index)
+    def flag_argument_specified?(index)
       args[index+1] && !args[index+1].start_with?('-')
     end
 
@@ -156,6 +180,10 @@ module Learn
 
     def has_test_command_and_output_flag?
       args[0] == 'test' && args.any? {|arg| ['-o', '--out'].include?(arg)}
+    end
+
+    def has_test_command_and_format_flag?
+      args[0] == 'test' && args.any? {|arg| ['-f', '--format'].include?(arg)}
     end
 
     # Exit methods
@@ -182,6 +210,11 @@ module Learn
 
     def exit_with_missing_output_file
       puts "Must specify an output file when using the -o, --out flag."
+      exit
+    end
+
+    def exit_with_missing_format_type
+      puts "Must specify a format type when using the -f, --format flag."
       exit
     end
   end
