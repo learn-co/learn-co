@@ -168,9 +168,9 @@ module Learn
 
     def only_has_flag_arguments?
       if arg_is_a_file?(args[0])
-        args[1..-1].all? {|arg| arg.start_with?('-')}
+        args[1..-1].all? {|arg| arg.start_with?('-') && KNOWN_TEST_FLAGS.include?(arg)}
       else
-        args.all? {|arg| arg.start_with?('-')}
+        args.all? {|arg| arg.start_with?('-') && KNOWN_TEST_FLAGS.include?(arg)}
       end
     end
 
