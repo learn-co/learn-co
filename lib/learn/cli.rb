@@ -12,8 +12,9 @@ module Learn
       \x5 -o, --out FILE    # Specify an output file
       \x5 -s, --skip        # Don't run dependency checks
 
-      When running an RSpec test suite, all normal RSpec options can be
-      passed in.
+      You can supply the following options when running Rspec tests:
+
+      --fail-fast           # Stop running rspec test suite on first failed test
     LONGDESC
     def test(*opts)
       system("learn-test #{opts.join(' ')}")
