@@ -1,5 +1,6 @@
 require 'net/http'
 require 'timeout'
+require 'openssl'
 
 module Learn
   class InternetConnection
