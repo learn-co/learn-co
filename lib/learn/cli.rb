@@ -17,7 +17,15 @@ module Learn
       --fail-fast           # Stop running rspec test suite on first failed test
     LONGDESC
     def test(*opts)
-      system("learn-test #{opts.join(' ')}")
+      begin
+        system("learn-test #{opts.join(' ')}")
+      rescue Interrupt
+        # Fail silently when students Ctrl-C out of the browser-sync dev server
+        # in the new in-browser Mocha testing setup for JavaScript labs
+        puts "\nExiting test suite..."
+
+        exit
+      end
     end
 
     desc 'version, -v, --version', 'Display the current version of the Learn gem'
