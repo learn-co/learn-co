@@ -16,12 +16,13 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib", "bin"]
+  spec.required_ruby_version = '>= 2.3.0'
 
   spec.add_development_dependency "bundler", "~> 1.7"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "pry"
 
-  spec.add_runtime_dependency "learn-test", "2.5.0.rc1"
+  spec.add_runtime_dependency "learn-test", "2.5.0.rc2"
   spec.add_runtime_dependency "learn-config", ">= 1.0.77"
   spec.add_runtime_dependency "learn-open", ">= 1.2.1"
   spec.add_runtime_dependency "learn-submit", "1.3.1"
