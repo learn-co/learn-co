@@ -10,7 +10,7 @@ module Learn
 end
 
 Learn.autoload              :VERSION,            'learn/version'
-Learn.autoload              :InternetConneciton, 'learn/internet_connection'
+Learn.autoload              :InternetConnection, 'learn/internet_connection'
 Learn.autoload              :CLI,                'learn/cli'
 Learn.autoload              :OptionsSanitizer,   'learn/options_sanitizer'
 Learn.autoload              :NetrcInteractor,    'learn/netrc_interactor'
