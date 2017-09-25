@@ -17,7 +17,7 @@ module Learn
       --fail-fast           # Stop running rspec test suite on first failed test
     LONGDESC
     def test(*opts)
-      system("learn-test #{opts.join(' ')}")
+      exec("learn-test #{opts.join(' ')}")
     end
 
     desc 'version, -v, --version', 'Display the current version of the Learn gem'
@@ -42,7 +42,7 @@ module Learn
         options['message']
       end
 
-      system("learn-submit #{commit_message}")
+      exec("learn-submit #{commit_message}")
     end
 
     desc "open [lesson-name] [--editor=editor-binary]", "Open your current lesson [or the given lesson] [with your editor]"
@@ -60,7 +60,7 @@ module Learn
       lab_name = Learn::Lab::Parser.new(lab_name.join(' ')).parse!
       editor = options[:editor]
 
-      system("learn-open #{lab_name} --editor=#{editor}")
+      exec("learn-open #{lab_name} --editor=#{editor}")
     end
 
     desc "next [--editor=editor-binary]", "Open your next lesson [with your editor]"
@@ -68,27 +68,27 @@ module Learn
     def next
       editor = options[:editor]
 
-      system("learn-open --next --editor=#{editor}")
+      exec("learn-open --next --editor=#{editor}")
     end
 
     desc 'whoami', 'Display your Learn gem configuration information'
     def whoami
-      system('learn-config --whoami')
+      exec('learn-config --whoami')
     end
 
     desc 'reset', 'Reset your Learn gem configuration'
     def reset
-      system('learn-config --reset')
+      exec('learn-config --reset')
     end
 
     desc 'directory', 'Set your local Learn directory. Defaults to ~/Development/code'
     def directory
-      system('learn-config --set-directory')
+      exec('learn-config --set-directory')
     end
 
     desc 'doctor', 'Check your local environment setup'
     def doctor
-      system('learn-doctor')
+      exec('learn-doctor')
     end
 
     desc 'new lab-name -t|--template template-name', 'Generate a new lesson repo using a Learn.co template', hide: true
@@ -100,10 +100,10 @@ module Learn
       list = options[:list]
 
       if list
-        system("learn-generate --list #{has_internet ? '--internet' : ''}")
+        exec("learn-generate --list #{has_internet ? '--internet' : ''}")
       else
         if template && template != 'template'
-          system("learn-generate #{template} #{lab_name.join} #{has_internet ? '--internet' : ''}")
+          exec("learn-generate #{template} #{lab_name.join} #{has_internet ? '--internet' : ''}")
         else
           puts "You must specify a template with -t or --template"
           exit
@@ -113,25 +113,25 @@ module Learn
 
     desc 'status', 'Get the status of your current lesson'
     def status
-      system('learn-status')
+      exec('learn-status')
     end
 
     desc 'hello', 'Verify your connection to Learn.co'
     def hello
-      system('learn-hello')
+      exec('learn-hello')
     end
 
     desc 'lint', 'Lint a directory for correct content', hide: true
     def lint(dir=nil, quiet=nil)
       if dir && !quiet
-        system("learn-lint #{dir}")
+        exec("learn-lint #{dir}")
       elsif dir && quiet
-        system("learn-lint #{dir} #{quiet}")
+        exec("learn-lint #{dir} #{quiet}")
       elsif !dir && quiet
-        system("learn-lint #{quiet}")
+        exec("learn-lint #{quiet}")
       else
         current_dir = Dir.pwd
-        system("learn-lint #{current_dir}")
+        exec("learn-lint #{current_dir}")
       end
     end
 
