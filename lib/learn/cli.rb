@@ -25,7 +25,7 @@ module Learn
       puts Learn::VERSION
     end
 
-    desc 'submit [-m|--message "message"] [-t|--team @username @username2]', 'Submit your completed lesson'
+    desc 'submit [-m "message"] [-t @username @username2]', 'Submit your completed lesson'
     option :message, required: false, type: :string, aliases: ['m']
     option :team,    required: false, type: :string, aliases: ['t']
     long_desc <<-LONGDESC
