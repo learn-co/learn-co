@@ -86,11 +86,6 @@ module Learn
       exec('learn-config --set-directory')
     end
 
-    desc 'doctor', 'Check your local environment setup'
-    def doctor
-      exec('learn-doctor')
-    end
-
     desc 'new lab-name -t|--template template-name', 'Generate a new lesson repo using a Learn.co template', hide: true
     option :template, required: false, type: :string, aliases: ['t']
     option :list, required: false, type: :boolean

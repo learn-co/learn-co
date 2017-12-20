@@ -19,7 +19,6 @@ module Learn
       'whoami',
       'directory',
       'next',
-      'doctor',
       'new',
       'status',
       'lint',

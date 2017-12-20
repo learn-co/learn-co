@@ -3,11 +3,11 @@
 require 'learn'
 
 NON_PRE_CONFIG_COMMANDS = [
-  'reset', 'whoami', 'directory', 'help', 'version', '--version', '-v', 'doctor', 'new', 'hello', 'lint', 'save'
+  'reset', 'whoami', 'directory', 'help', 'version', '--version', '-v', 'new', 'hello', 'lint', 'save'
 ]
 
 INTERNET_REQUIRED_COMMANDS = [
-  'whoami', 'doctor', 'directory', 'reset', 'hello'
+  'whoami', 'directory', 'reset', 'hello'
 ]
 
 LEARN_CONFIG_COMMANDS = ['reset', 'whoami', 'directory']
