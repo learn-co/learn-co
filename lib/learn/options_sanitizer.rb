@@ -32,6 +32,7 @@ module Learn
       '--browser',
       '-s',
       '--skip',
+      '--sync',
       '--keep',
       '--fail-fast'
     ]
