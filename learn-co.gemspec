@@ -28,7 +28,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency "learn-open", "1.2.22"
   spec.add_runtime_dependency "learn-status", ">= 1.0.1"
   spec.add_runtime_dependency "learn-submit", "1.3.1"
-  spec.add_runtime_dependency "learn-test", "2.5.6"
+  spec.add_runtime_dependency "learn-test", "2.6.0"
   spec.add_runtime_dependency "learn_linter", ">= 1.6.0"
   spec.add_runtime_dependency "netrc", ">= 0.11.0"
   spec.add_runtime_dependency "thor", ">= 0.19.1"
