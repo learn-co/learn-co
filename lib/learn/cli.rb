@@ -56,19 +56,29 @@ module Learn
       in your browser.
     LONGDESC
     option :editor, required: false, type: :string, aliases: ['e']
+    option :"clone-only", required: false, type: :boolean
     def open(*lab_name)
       lab_name = Learn::Lab::Parser.new(lab_name.join(' ')).parse!
       editor = options[:editor]
+      clone_only = options[:"clone-only"]
 
-      exec("learn-open #{lab_name} --editor=#{editor}")
+      command = "learn-open #{lab_name} --editor=#{editor}"
+      command << " --clone-only" if clone_only
+
+      exec(command)
     end
 
     desc "next [--editor=editor-binary]", "Open your next lesson [with your editor]"
     option :editor, required: false, type: :string, aliases: ['e']
+    option :"clone-only", required: false, type: :string
     def next
       editor = options[:editor]
+      clone_only = options[:"clone-only"]
 
-      exec("learn-open --next --editor=#{editor}")
+      command = "learn-open --next --editor=#{editor}"
+      command << " --clone-only" if clone_only
+
+      exec(command)
     end
 
     desc 'whoami', 'Display your Learn gem configuration information'
