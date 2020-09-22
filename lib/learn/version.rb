@@ -1,3 +1,3 @@
 module Learn
-  VERSION = '4.0.1.pre.1'
+  VERSION = '4.0.1'
 end
