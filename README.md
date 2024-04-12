@@ -1,6 +1,4 @@
-# learn-co
-
-The command line interface to Learn.co.
+# ⚠️ This gem is no longer maintained or supported
 
 ## Installation
 
